@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Massage Studio — Київ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0d1911;
+    --bg-section:#122019;
+    --bg-card:#16261d;
+    --ivory:#f4efe2;
+    --ivory-dim:#cdc7b6;
+    --gold:#c9a866;
+    --gold-soft:#e3cd9a;
+    --rose:#b98f7f;
+    --line:rgba(244,239,226,0.13);
+    --shadow:0 30px 60px -25px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-deep);
+    color:var(--ivory);
+    font-family:'Manrope', sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .eyebrow{
+    font-family:'Space Grotesk', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.22em;
+    font-size:0.72rem;
+    color:var(--gold-soft);
+    font-weight:500;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:450; line-height:1.05;}
+  .container{max-width:1180px; margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--gold); color:#12200f;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:26px 0;
+    transition:padding .4s ease, background .4s ease, box-shadow .4s ease;
+  }
+  header.scrolled{
+    padding:14px 0;
+    background:rgba(13,25,17,0.86);
+    backdrop-filter:blur(14px);
+    box-shadow:0 10px 30px -18px rgba(0,0,0,0.6);
+    border-bottom:1px solid var(--line);
+  }
+  nav.container{display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:12px;}
+  .logo .mark{
+    width:40px; height:40px; border-radius:50%;
+    border:1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-size:1rem; color:var(--gold-soft);
+    flex-shrink:0;
+  }
+  .logo .name{font-family:'Fraunces', serif; font-size:1.05rem; letter-spacing:0.02em;}
+  .logo .name span{display:block; font-family:'Space Grotesk', monospace; font-size:0.6rem; letter-spacing:0.18em; color:var(--ivory-dim); text-transform:uppercase; margin-top:2px;}
+  .nav-links{display:flex; gap:38px; align-items:center;}
+  .nav-links a{
+    font-size:0.85rem; color:var(--ivory-dim); position:relative; padding:4px 0;
+    transition:color .3s ease;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--gold);
+    transition:width .35s ease;
+  }
+  .nav-links a:hover{color:var(--ivory);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .phone-link{font-size:0.85rem; color:var(--ivory-dim); white-space:nowrap; transition:color .3s;}
+  .phone-link:hover{color:var(--gold-soft);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 26px; border-radius:100px;
+    font-family:'Space Grotesk', monospace; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase;
+    cursor:pointer; border:1px solid transparent;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .3s ease, color .3s ease;
+  }
+  .btn-gold{background:var(--gold); color:#1a2a1a;}
+  .btn-gold:hover{transform:translateY(-2px); box-shadow:0 14px 30px -10px rgba(201,168,102,0.5);}
+  .btn-outline{border-color:var(--line); color:var(--ivory);}
+  .btn-outline:hover{border-color:var(--gold); color:var(--gold-soft); transform:translateY(-2px);}
+  .burger{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100vh; display:flex; align-items:center;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(13,25,17,0.55) 0%, rgba(13,25,17,0.75) 45%, var(--bg-deep) 96%),
+      url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1800&q=80') center 30%/cover no-repeat;
+    background-color:#1a2a1c;
+  }
+  .grain-drift{
+    position:absolute; inset:-10%;
+    background:radial-gradient(circle at 20% 30%, rgba(201,168,102,0.10), transparent 45%),
+               radial-gradient(circle at 80% 70%, rgba(185,143,127,0.10), transparent 40%);
+    animation:drift 22s ease-in-out infinite alternate;
+    pointer-events:none;
+  }
+  @keyframes drift{
+    0%{transform:translate(0,0) scale(1);}
+    100%{transform:translate(3%,-3%) scale(1.06);}
+  }
+  .hero-content{position:relative; z-index:2; padding-top:120px;}
+  .hero-content .eyebrow{opacity:0; animation:riseIn .9s ease .15s forwards;}
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    max-width:820px; margin-top:22px;
+    opacity:0; animation:riseIn 1s ease .35s forwards;
+  }
+  .hero h1 em{font-style:italic; color:var(--gold-soft); font-weight:400;}
+  .hero p.lead{
+    max-width:520px; margin-top:24px; font-size:1.05rem; color:var(--ivory-dim); line-height:1.65;
+    opacity:0; animation:riseIn 1s ease .55s forwards;
+  }
+  .hero-actions{
+    display:flex; gap:18px; margin-top:42px; flex-wrap:wrap;
+    opacity:0; animation:riseIn 1s ease .75s forwards;
+  }
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(22px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .hero-meta{
+    position:absolute; right:32px; bottom:48px; z-index:2;
+    text-align:right; font-family:'Space Grotesk', monospace; font-size:0.75rem;
+    color:var(--ivory-dim); line-height:1.9;
+    opacity:0; animation:riseIn 1s ease 1s forwards;
+  }
+  .scroll-cue{
+    position:absolute; left:32px; bottom:48px; z-index:2;
+    display:flex; align-items:center; gap:10px; font-size:0.72rem; color:var(--ivory-dim);
+    font-family:'Space Grotesk', monospace; letter-spacing:0.1em; text-transform:uppercase;
+    opacity:0; animation:riseIn 1s ease 1s forwards;
+  }
+  .scroll-cue .line{width:1px; height:34px; background:var(--line); position:relative; overflow:hidden;}
+  .scroll-cue .line::after{
+    content:''; position:absolute; top:-40%; left:0; width:100%; height:40%; background:var(--gold);
+    animation:scrollLine 2.4s ease-in-out infinite;
+  }
+  @keyframes scrollLine{
+    0%{top:-40%;} 60%{top:100%;} 100%{top:100%;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative; padding:130px 0;}
+  .section-head{max-width:640px; margin-bottom:70px;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head h2{font-size:clamp(2rem, 3.6vw, 2.9rem);}
+  .reveal{opacity:0; transform:translateY(34px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--bg-section); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .service-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;}
+  .service-card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:18px;
+    overflow:hidden; cursor:pointer;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease, border-color .5s ease;
+    display:flex; flex-direction:column;
+  }
+  .service-card:hover{transform:translateY(-10px); box-shadow:var(--shadow); border-color:rgba(201,168,102,0.4);}
+  .card-img{height:230px; overflow:hidden; position:relative;}
+  .card-img img{width:100%; height:100%; object-fit:cover; transition:transform 1.1s cubic-bezier(.2,.8,.2,1); transform:scale(1.02);}
+  .service-card:hover .card-img img{transform:scale(1.14) rotate(0.3deg);}
+  .card-img::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 60%, rgba(13,20,15,0.5)); }
+  .card-body{padding:26px 26px 28px; display:flex; flex-direction:column; gap:14px; flex:1;}
+  .card-tag{font-family:'Space Grotesk', monospace; font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--rose);}
+  .card-body h3{font-size:1.4rem; font-weight:450;}
+  .card-meta{display:flex; align-items:baseline; justify-content:space-between; margin-top:auto; padding-top:14px; border-top:1px solid var(--line);}
+  .price{font-family:'Fraunces', serif; font-size:1.5rem; color:var(--gold-soft);}
+  .duration{font-family:'Space Grotesk', monospace; font-size:0.78rem; color:var(--ivory-dim);}
+  .card-cta{
+    display:flex; align-items:center; justify-content:space-between;
+    font-family:'Space Grotesk', monospace; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ivory); margin-top:4px;
+  }
+  .card-cta .arrow{transition:transform .35s ease;}
+  .service-card:hover .card-cta .arrow{transform:translateX(6px);}
+
+  /* ---------- ABOUT / SIGNATURE ---------- */
+  .about{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;}
+  .sprig-wrap{position:relative; display:flex; align-items:center; justify-content:center;}
+  .sprig-wrap svg{width:100%; max-width:380px; height:auto;}
+  .sprig-path{
+    stroke-dasharray:900; stroke-dashoffset:900;
+    transition:stroke-dashoffset 2.4s cubic-bezier(.2,.7,.2,1);
+  }
+  .sprig-wrap.in .sprig-path{stroke-dashoffset:0;}
+  .about-text p{color:var(--ivory-dim); line-height:1.8; margin-top:22px; font-size:1.02rem;}
+  .owner-row{display:flex; align-items:center; gap:18px; margin-top:38px; padding-top:30px; border-top:1px solid var(--line);}
+  .owner-avatar{
+    width:58px; height:58px; border-radius:50%; border:1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-size:1.2rem; color:var(--gold-soft); flex-shrink:0;
+    background:radial-gradient(circle at 30% 30%, rgba(201,168,102,0.18), transparent 70%);
+  }
+  .owner-name{font-family:'Fraunces', serif; font-size:1.05rem;}
+  .owner-role{font-family:'Space Grotesk', monospace; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ivory-dim); margin-top:3px;}
+
+  /* ---------- SCHEDULE ---------- */
+  .schedule{background:var(--bg-section); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .sched-wrap{display:grid; grid-template-columns:1fr 1.15fr; gap:70px;}
+  .sched-list{border-top:1px solid var(--line);}
+  .sched-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 4px; border-bottom:1px solid var(--line);
+    font-family:'Space Grotesk', monospace; font-size:0.88rem; color:var(--ivory-dim);
+    transition:background .3s ease, padding .3s ease;
+  }
+  .sched-row.today{
+    color:var(--ivory); background:rgba(201,168,102,0.07); padding-left:16px; padding-right:16px; border-radius:10px;
+  }
+  .sched-row.today .day{color:var(--gold-soft);}
+  .sched-row .dot{width:6px; height:6px; border-radius:50%; background:var(--gold); margin-right:10px; display:inline-block; opacity:0;}
+  .sched-row.today .dot{opacity:1;}
+  .sched-side{position:relative; border-radius:18px; overflow:hidden; min-height:340px;}
+  .sched-side img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+  .sched-side::after{content:''; position:absolute; inset:0; background:linear-gradient(160deg, rgba(13,25,17,0.15), rgba(13,25,17,0.7));}
+  .sched-side .badge{
+    position:absolute; bottom:24px; left:24px; z-index:2;
+    font-family:'Space Grotesk', monospace; font-size:0.78rem; color:var(--ivory);
+    background:rgba(13,25,17,0.55); border:1px solid var(--line); padding:10px 16px; border-radius:100px;
+    backdrop-filter:blur(6px);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap{display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px;}
+  .contact-item{display:flex; gap:18px; padding:22px 0; border-bottom:1px solid var(--line);}
+  .contact-item:first-child{padding-top:0;}
+  .contact-icon{
+    width:44px; height:44px; border-radius:50%; border:1px solid var(--gold); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; color:var(--gold-soft);
+  }
+  .contact-label{font-family:'Space Grotesk', monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ivory-dim); margin-bottom:6px;}
+  .contact-value{font-size:1.05rem; transition:color .3s ease;}
+  .contact-item a.contact-value:hover{color:var(--gold-soft);}
+  .map-card{
+    border-radius:18px; border:1px solid var(--line); overflow:hidden; position:relative; min-height:100%;
+  }
+  .map-card iframe, .map-card .map-fallback{width:100%; height:100%; min-height:380px; border:0; display:block;}
+  .map-fallback{
+    background:
+      radial-gradient(circle at 30% 30%, rgba(201,168,102,0.14), transparent 55%),
+      var(--bg-card);
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; padding:30px; text-align:center;
+  }
+  .map-fallback .pin{
+    width:52px; height:52px; border-radius:50% 50% 50% 0; background:var(--gold); transform:rotate(-45deg);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px -8px rgba(201,168,102,0.5);
+    animation:pinBounce 2.6s ease-in-out infinite;
+  }
+  .map-fallback .pin::after{content:''; width:16px; height:16px; background:var(--bg-deep); border-radius:50%; transform:rotate(45deg);}
+  @keyframes pinBounce{0%,100%{transform:rotate(-45deg) translateY(0);} 50%{transform:rotate(-45deg) translateY(-8px);}}
+
+  /* ---------- FLOATING BOOK BUTTON ---------- */
+  .fab{
+    position:fixed; right:28px; bottom:28px; z-index:200;
+    display:flex; align-items:center; gap:10px;
+    background:var(--gold); color:#1a2a1a; padding:16px 22px; border-radius:100px;
+    font-family:'Space Grotesk', monospace; font-size:0.8rem; letter-spacing:0.05em; text-transform:uppercase;
+    box-shadow:0 16px 40px -14px rgba(201,168,102,0.55);
+    animation:pulse 2.8s ease-in-out infinite;
+    transition:transform .3s ease;
+  }
+  .fab:hover{transform:scale(1.06);}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 16px 40px -14px rgba(201,168,102,0.55);}
+    50%{box-shadow:0 16px 46px -10px rgba(201,168,102,0.85);}
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(9,16,11,0.72); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; z-index:300;
+    opacity:0; pointer-events:none; transition:opacity .35s ease;
+    padding:24px;
+  }
+  .modal-overlay.open{opacity:1; pointer-events:all;}
+  .modal-box{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:20px; padding:44px;
+    max-width:420px; width:100%; text-align:center;
+    transform:translateY(24px) scale(0.97); transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    box-shadow:var(--shadow);
+  }
+  .modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
+  .modal-box .ring{
+    width:64px; height:64px; border-radius:50%; border:1px solid var(--gold); margin:0 auto 22px;
+    display:flex; align-items:center; justify-content:center; color:var(--gold-soft); font-size:1.4rem;
+  }
+  .modal-box h3{font-size:1.5rem; margin-bottom:10px;}
+  .modal-box p{color:var(--ivory-dim); font-size:0.95rem; line-height:1.6; margin-bottom:28px;}
+  .modal-actions{display:flex; flex-direction:column; gap:12px;}
+  .modal-close{margin-top:18px; font-size:0.78rem; color:var(--ivory-dim); cursor:pointer; font-family:'Space Grotesk', monospace; letter-spacing:0.05em; text-transform:uppercase;}
+  .modal-close:hover{color:var(--gold-soft);}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line); padding:50px 0 40px;}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;}
+  .footer-row .eyebrow{color:var(--ivory-dim);}
+  .socials{display:flex; gap:16px;}
+  .socials a{width:38px; height:38px; border:1px solid var(--line); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:border-color .3s, color .3s;}
+  .socials a:hover{border-color:var(--gold); color:var(--gold-soft);}
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .about, .sched-wrap, .contact-wrap{grid-template-columns:1fr;}
+    .service-grid{grid-template-columns:1fr;}
+    section{padding:90px 0;}
+    .hero-meta{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="container">
+    <div class="logo">
+      <div class="mark">FM</div>
+      <div class="name">Family Massage<span>Studio · Kyiv</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#services">Послуги</a>
+      <a href="#about">Про нас</a>
+      <a href="#schedule">Графік</a>
+      <a href="#contact">Контакти</a>
+    </div>
+    <div class="nav-cta">
+      <a class="phone-link" href="tel:+380682812121">+38 (068) 281 21 21</a>
+      <a class="btn btn-gold" href="#services">Записатись</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="grain-drift"></div>
+  <div class="container hero-content">
+    <div class="eyebrow">Студія масажу для всієї родини — Київ</div>
+    <h1>Тіло відпочиває.<br><em>Розум звільняється.</em></h1>
+    <p class="lead">Класичний масаж, догляд за обличчям та антицелюлітні процедури у затишній студії на вулиці Родини Крістерів. Кожен сеанс — це пауза, яку варто собі дозволити.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="#services">Обрати процедуру</a>
+      <a class="btn btn-outline" href="tel:+380682812121">Подзвонити нам</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Гортайте</span><span class="line"></span></div>
+  <div class="hero-meta">
+    вул. Родини Крістерів, 18/6<br>
+    Пн–Нд · 09:00–21:00
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Послуги</div>
+      <h2>Три ритуали для тіла й обличчя</h2>
+    </div>
+    <div class="service-grid">
+
+      <div class="service-card reveal" onclick="openBooking('Класичний масаж усього тіла', '1 000 ₴', '60 хв')">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=900&q=80" alt="Класичний масаж усього тіла" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-tag">Тіло</div>
+          <h3>Класичний масаж усього тіла</h3>
+          <div class="card-meta">
+            <span class="price">1 000 ₴</span>
+            <span class="duration">60 хвилин</span>
+          </div>
+          <div class="card-cta"><span>Записатись</span><span class="arrow">→</span></div>
+        </div>
+      </div>
+
+      <div class="service-card reveal" onclick="openBooking('Класичний масаж обличчя', '700 ₴', '30 хв')">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1596178060810-72583c0fc85b?auto=format&fit=crop&w=900&q=80" alt="Класичний масаж обличчя" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-tag">Обличчя</div>
+          <h3>Класичний масаж обличчя</h3>
+          <div class="card-meta">
+            <span class="price">700 ₴</span>
+            <span class="duration">30 хвилин</span>
+          </div>
+          <div class="card-cta"><span>Записатись</span><span class="arrow">→</span></div>
+        </div>
+      </div>
+
+      <div class="service-card reveal" onclick="openBooking('Комплексний антицелюлітний масаж', '1 250 ₴', '60 хв')">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80" alt="Антицелюлітний масаж" loading="lazy"></div>
+        <div class="card-body">
+          <div class="card-tag">Тіло</div>
+          <h3>Комплексний антицелюлітний масаж</h3>
+          <div class="card-meta">
+            <span class="price">1 250 ₴</span>
+            <span class="duration">60 хвилин</span>
+          </div>
+          <div class="card-cta"><span>Записатись</span><span class="arrow">→</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about" style="padding-top:130px; padding-bottom:130px;">
+  <div class="container about">
+    <div class="sprig-wrap reveal">
+      <svg viewBox="0 0 300 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="sprig-path" d="M150 370 C150 300 150 230 150 150" stroke="#c9a866" stroke-width="2" stroke-linecap="round"/>
+        <path class="sprig-path" d="M150 300 C120 280 90 270 60 250" stroke="#c9a866" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="sprig-path" d="M150 300 C180 280 210 270 240 250" stroke="#c9a866" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="sprig-path" d="M150 250 C120 230 95 218 65 200" stroke="#c9a866" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="sprig-path" d="M150 250 C180 230 205 218 235 200" stroke="#c9a866" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="sprig-path" d="M150 200 C122 182 100 170 75 152" stroke="#c9a866" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="sprig-path" d="M150 200 C178 182 200 170 225 152" stroke="#c9a866" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="sprig-path" d="M150 150 C128 128 112 112 92 90" stroke="#c9a866" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="sprig-path" d="M150 150 C172 128 188 112 208 90" stroke="#c9a866" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse class="sprig-path" cx="55" cy="245" rx="16" ry="8" transform="rotate(-30 55 245)" stroke="#e3cd9a" stroke-width="1.3"/>
+        <ellipse class="sprig-path" cx="245" cy="245" rx="16" ry="8" transform="rotate(30 245 245)" stroke="#e3cd9a" stroke-width="1.3"/>
+        <ellipse class="sprig-path" cx="60" cy="195" rx="15" ry="7" transform="rotate(-28 60 195)" stroke="#e3cd9a" stroke-width="1.3"/>
+        <ellipse class="sprig-path" cx="240" cy="195" rx="15" ry="7" transform="rotate(28 240 195)" stroke="#e3cd9a" stroke-width="1.3"/>
+        <ellipse class="sprig-path" cx="68" cy="147" rx="14" ry="7" transform="rotate(-25 68 147)" stroke="#e3cd9a" stroke-width="1.3"/>
+        <ellipse class="sprig-path" cx="232" cy="147" rx="14" ry="7" transform="rotate(25 232 147)" stroke="#e3cd9a" stroke-width="1.3"/>
+        <ellipse class="sprig-path" cx="86" cy="88" rx="13" ry="6.5" transform="rotate(-22 86 88)" stroke="#e3cd9a" stroke-width="1.3"/>
+        <ellipse class="sprig-path" cx="214" cy="88" rx="13" ry="6.5" transform="rotate(22 214 88)" stroke="#e3cd9a" stroke-width="1.3"/>
+        <ellipse class="sprig-path" cx="150" cy="45" rx="15" ry="30" stroke="#c9a866" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="about-text reveal">
+      <div class="eyebrow">Про студію</div>
+      <h2>Родинна атмосфера, професійний догляд</h2>
+      <p>Family Massage Studio працює на вулиці Родини Крістерів, 18/6 у Києві. Ми поєднуємо класичні техніки масажу з уважним, теплим ставленням до кожного клієнта — тому й називаємось «родинною» студією.</p>
+      <p>Щодня, без вихідних, з 09:00 до 21:00 ми допомагаємо тілу відновитись після напруженого дня, зняти затиски та повернути легкість рухам.</p>
+      <div class="owner-row">
+        <div class="owner-avatar">ЮЯ</div>
+        <div>
+          <div class="owner-name">Юлія Яценко</div>
+          <div class="owner-role">Власниця студії</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="schedule" id="schedule">
+  <div class="container">
+    <div class="sched-wrap">
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:16px;">Графік роботи</div>
+        <h2 style="margin-bottom:30px;">Чекаємо на вас щодня</h2>
+        <div class="sched-list" id="schedList">
+          <div class="sched-row" data-day="1"><span class="day"><span class="dot"></span>Понеділок</span><span>09:00 – 21:00</span></div>
+          <div class="sched-row" data-day="2"><span class="day"><span class="dot"></span>Вівторок</span><span>09:00 – 21:00</span></div>
+          <div class="sched-row" data-day="3"><span class="day"><span class="dot"></span>Середа</span><span>09:00 – 21:00</span></div>
+          <div class="sched-row" data-day="4"><span class="day"><span class="dot"></span>Четвер</span><span>09:00 – 21:00</span></div>
+          <div class="sched-row" data-day="5"><span class="day"><span class="dot"></span>П'ятниця</span><span>09:00 – 21:00</span></div>
+          <div class="sched-row" data-day="6"><span class="day"><span class="dot"></span>Субота</span><span>09:00 – 21:00</span></div>
+          <div class="sched-row" data-day="0"><span class="day"><span class="dot"></span>Неділя</span><span>09:00 – 21:00</span></div>
+        </div>
+      </div>
+      <div class="sched-side reveal">
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80" alt="Інтер'єр студії" loading="lazy">
+        <div class="badge">Без вихідних · 09:00–21:00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container contact-wrap">
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom:16px;">Контакти</div>
+      <h2 style="margin-bottom:34px;">Як нас знайти</h2>
+
+      <div class="contact-item">
+        <div class="contact-icon">✆</div>
+        <div>
+          <div class="contact-label">Телефон</div>
+          <a class="contact-value" href="tel:+380682812121">+38 (068) 281 21 21</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">⌖</div>
+        <div>
+          <div class="contact-label">Адреса</div>
+          <a class="contact-value" href="https://www.google.com/maps/search/?api=1&query=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B8%20%D0%9A%D1%80%D1%96%D1%81%D1%82%D0%B5%D1%80%D1%96%D0%B2%2018%2F6%20%D0%9A%D0%B8%D1%97%D0%B2" target="_blank" rel="noopener">вулиця Родини Крістерів, 18/6, Київ</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">◔</div>
+        <div>
+          <div class="contact-label">Графік</div>
+          <span class="contact-value">Щодня · 09:00 – 21:00</span>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">✎</div>
+        <div>
+          <div class="contact-label">Записатись онлайн</div>
+          <a class="contact-value" href="#" onclick="openBooking('Консультацію щодо процедур', '', ''); return false;">family.massage.studio</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-card reveal">
+      <div class="map-fallback">
+        <div class="pin"></div>
+        <div>
+          <div style="font-family:'Fraunces', serif; font-size:1.15rem; margin-bottom:6px;">вул. Родини Крістерів, 18/6</div>
+          <div style="color:var(--ivory-dim); font-size:0.85rem;">Київ, Україна</div>
+        </div>
+        <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B8%20%D0%9A%D1%80%D1%96%D1%81%D1%82%D0%B5%D1%80%D1%96%D0%B2%2018%2F6%20%D0%9A%D0%B8%D1%97%D0%B2" target="_blank" rel="noopener">Прокласти маршрут</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-row">
+    <div class="eyebrow">© 2026 Family Massage Studio · Київ</div>
+    <div class="socials">
+      <a href="tel:+380682812121" title="Телефон">✆</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%A0%D0%BE%D0%B4%D0%B8%D0%BD%D0%B8%20%D0%9A%D1%80%D1%96%D1%81%D1%82%D0%B5%D1%80%D1%96%D0%B2%2018%2F6%20%D0%9A%D0%B8%D1%97%D0%B2" target="_blank" rel="noopener" title="Карта">⌖</a>
+      <a href="#services" title="Послуги">✂</a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="tel:+380682812121">
+  <span>✆</span><span>Записатись</span>
+</a>
+
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <div class="ring">✆</div>
+    <h3 id="modalTitle">Запис на процедуру</h3>
+    <p id="modalText">Зателефонуйте нам — і ми підберемо зручний час.</p>
+    <div class="modal-actions">
+      <a class="btn btn-gold" href="tel:+380682812121" style="justify-content:center;">Подзвонити +38 (068) 281 21 21</a>
+      <span class="modal-close" onclick="closeBooking()">Закрити</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Header shrink on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.classList.contains('sprig-wrap')) e.target.classList.add('in');
+      }
+    });
+  }, {threshold:0.18});
+  revealEls.forEach(el => io.observe(el));
+
+  // Highlight today in schedule (0 = Sunday ... 6 = Saturday, matches JS getDay())
+  const today = new Date().getDay();
+  document.querySelectorAll('.sched-row').forEach(row => {
+    if(parseInt(row.dataset.day) === today){
+      row.classList.add('today');
+    }
+  });
+
+  // Booking modal
+  function openBooking(name, price, duration){
+    const modal = document.getElementById('bookingModal');
+    const title = document.getElementById('modalTitle');
+    const text = document.getElementById('modalText');
+    title.textContent = name;
+    text.textContent = price
+      ? `Вартість: ${price}${duration ? ' · ' + duration : ''}. Зателефонуйте нам, щоб обрати зручний час.`
+      : 'Зателефонуйте нам — і ми з радістю відповімо на всі запитання.';
+    modal.classList.add('open');
+  }
+  function closeBooking(){
+    document.getElementById('bookingModal').classList.remove('open');
+  }
+  document.getElementById('bookingModal').addEventListener('click', (e) => {
+    if(e.target.id === 'bookingModal') closeBooking();
+  });
+</script>
+
+</body>
+</html>
